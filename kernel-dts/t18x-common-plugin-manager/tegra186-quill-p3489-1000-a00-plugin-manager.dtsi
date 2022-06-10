@@ -64,7 +64,19 @@
 			override@0 {
 				target = <&{/host1x}>;
 				_overlay_ {
+					nvdisplay@15200000 {
+						nvidia,fb-win = <0>;
+						win-mask = <0x3>;
+						status = "okay";
+					};
+					nvdisplay@15210000 {
+						nvidia,fb-win = <2>;
+						win-mask = <0xC>;
+						status = "okay";
+					};
 					nvdisplay@15220000 {
+						nvidia,fb-win = <4>;
+						win-mask = <0x30>;
 						status = "okay";
 					};
 					sor {
@@ -80,9 +92,19 @@
 			};
 		};
 
+		fragment-comms-ethernet {
+			ids = ">=3489-0001-300";
+			override@0 {
+				target = <&{/ether_qos@2490000}>;
+				_overlay_ {
+					status = "disabled";
+				};
+			};
+		};
+
 		fragment-500-e3325-pcie {
 			enable-override-on-all-matches;
-			ids = ">=3489-0000-200", ">=3489-0888-300";
+			ids = ">=3489-0000-200", ">=3489-0888-300", ">=3489-0001-300";
 			odm-data = "enable-pcie-on-uphy-lane0";
 			override@0 {
 				target = <&{/xhci@3530000}>;

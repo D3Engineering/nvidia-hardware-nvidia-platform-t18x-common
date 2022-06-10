@@ -16,6 +16,7 @@
 #include "tegra186-quill-common.dtsi"
 #include "tegra186-quill-p3489-1000-a00-powermon.dtsi"
 #include "tegra186-storm-thermal.dtsi"
+#include "tegra186-thermal-userspace-alert.dtsi"
 
 #define EXTCON_NONE		0
 #define EXTCON_USB             1
@@ -48,7 +49,7 @@
 	spi@3240000 {
 		status = "okay";
 		spi@0 {
-			compatible = "spidev";
+			compatible = "tegra-spidev";
 			reg = <0x0>;
 			spi-max-frequency = <33000000>;
 			controller-data {
@@ -58,7 +59,7 @@
 			};
 		};
 		spi@1 {
-			compatible = "spidev";
+			compatible = "tegra-spidev";
 			reg = <0x1>;
 			spi-max-frequency = <33000000>;
 			controller-data {
@@ -168,5 +169,16 @@
                 };
         };
 
+	bcpu_alert: bcpu-throttle-alert {
+		status = "okay";
+	};
+
+	mcpu_alert: mcpu-throttle-alert {
+		status = "okay";
+	};
+
+	gpu_alert: gpu-throttle-alert {
+		status = "okay";
+	};
 };
 

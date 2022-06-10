@@ -1,7 +1,7 @@
 /*
  * tegra186-quill-common-p3310-1000-a00.dtsi: Quill common dtsi.
  *
- * Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+ * Copyright (c) 2015-2020, NVIDIA CORPORATION.  All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 #include "tegra186-quill-p3310-1000-a00-powermon.dtsi"
 #include "tegra186-quill-thermal.dtsi"
 #include "tegra186-quill-tskin-feature.dtsi"
+#include "tegra186-thermal-userspace-alert.dtsi"
 
 #define EXTCON_NONE		0
 #define EXTCON_USB             1
@@ -46,7 +47,7 @@
 	spi@3240000 {
 		status = "okay";
 		spi@0 {
-			compatible = "spidev";
+			compatible = "tegra-spidev";
 			reg = <0x0>;
 			spi-max-frequency = <33000000>;
 			controller-data {
@@ -56,7 +57,7 @@
 			};
 		};
 		spi@1 {
-			compatible = "spidev";
+			compatible = "tegra-spidev";
 			reg = <0x1>;
 			spi-max-frequency = <33000000>;
 			controller-data {
@@ -126,6 +127,18 @@
 
 	nvdumper {
 		status = "disabled";
+	};
+
+	bcpu_alert: bcpu-throttle-alert {
+		status = "okay";
+	};
+
+	mcpu_alert: mcpu-throttle-alert {
+		status = "okay";
+	};
+
+	gpu_alert: gpu-throttle-alert {
+		status = "okay";
 	};
 };
 
